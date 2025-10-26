@@ -77,6 +77,7 @@ class CountMinSketch {
    * @return Vector of (item, count) pairs in descending count order
    */
   auto TopK(uint16_t k, const std::vector<KeyType> &candidates) -> std::vector<std::pair<KeyType, uint32_t>>;
+  auto estimate(const KeyType &key) const -> uint32_t;
 
  private:
   /** Dimensions of the count-min sketch matrix */
@@ -103,6 +104,8 @@ class CountMinSketch {
   }
 
   /** @todo (student) can add their data structures that support count-min sketch operations */
+  std::vector<std::vector<size_t>> hash_matrix_;
+  std::vector<std::unique_ptr<std::mutex>> row_mutexes_;
 };
 
 }  // namespace bustub
